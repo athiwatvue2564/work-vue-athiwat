@@ -23,7 +23,7 @@
               >
                 <v-text-field
                   label="Your Name"
-                  placeholder="Placeholde1111"
+                  placeholder="Your Name"
                   outlined
                   dense
                 />
@@ -38,7 +38,7 @@
               >
                 <v-text-field
                   label="Bank Account"
-                  placeholder="Placeholde1111"
+                  placeholder="Your Account"
                   outlined
                   dense
                 />
@@ -53,7 +53,7 @@
               >
                 <v-text-field
                   label="Mobile phone number"
-                  placeholder="Placeholde1111"
+                  placeholder="Your Phone Number"
                   outlined
                   dense
                 />
@@ -68,7 +68,7 @@
               >
                 <v-text-field
                   label="Email"
-                  placeholder="Placeholde1111"
+                  placeholder="Your Email"
                   outlined
                   dense
                 />
@@ -83,7 +83,7 @@
               >
                 <v-text-field
                   label="Password"
-                  placeholder="Placeholde1111"
+                  placeholder="Your Password"
                   append-icon="mdi-eye"
                   outlined
                   dense
