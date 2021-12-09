@@ -25,6 +25,17 @@
             <v-menu transition="scroll-y-transition">
               <template #activator="{ on, attrs }">
                 <v-text-field
+                  v-model="user"
+                  label="PLEATE ENTER USER NAME"
+                  placeholder="User"
+                  filled
+                  rounded
+                  dense
+                  v-bind="attrs"
+                  v-on="on"
+                />
+                <v-text-field
+                  v-model="pass"
                   label="PLEATE ENTER YOUR PASSWORD..."
                   placeholder="Password"
                   filled
@@ -153,7 +164,7 @@
               </div>
             </v-menu>
 
-            <v-btn class="btn1">
+            <v-btn class="btn1" @click="onSave">
               <span class="txt1">LOG IN</span>
             </v-btn>
             <center><i class="fas fa-university" style="color:#ffd000;" /></center>
@@ -165,6 +176,24 @@
     </v-form>
   </div>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    user: '',
+    passwd: ''
+  }),
+  methods: {
+    async  onSave () {
+      console.log('onSave')
+      const res = await fetch('http://localhost:7001/list?user=' + this.user + '&pass= ' + this.pass)
+      const data = await res.json()
+      console.log('data = ', data)
+    }
+
+  }
+}
+</script>
 
 <style>
 .pa-7 {
