@@ -44,8 +44,41 @@
                   v-bind="attrs"
                   v-on="on"
                 />
+                <v-dialog
+                  v-model="dialog"
+                  width="500"
+                >
+                  <v-card>
+                    <v-card-title class="text-h5 grey lighten-2">
+                      WELCOME LOGIN
+                    </v-card-title>
+
+                    <v-card-text>
+                      SUCCEEC LOGIN {{ fname }}
+                    </v-card-text>
+
+                    <v-divider />
+                  </v-card>
+                </v-dialog>
+
+                <v-dialog
+                  v-model="failed"
+                  width="500"
+                >
+                  <v-card>
+                    <v-card-title class="text-h5 grey lighten-2">
+                      LOGIN ERROR
+                    </v-card-title>
+
+                    <v-card-text>
+                      USER or PASSWORD
+                    </v-card-text>
+
+                    <v-divider />
+                  </v-card>
+                </v-dialog>
               </template>
-              <div class="box">
+              <!-- <div class="box">
                 <v-row>
                   <v-col class="d-flex justify-center ">
                     <v-btn
@@ -161,7 +194,7 @@
                     </v-btn>
                   </v-col>
                 </v-row>
-              </div>
+              </div> -->
             </v-menu>
 
             <v-btn class="btn1" @click="onSave">
@@ -181,14 +214,36 @@
 export default {
   data: () => ({
     user: '',
-    passwd: ''
+    passwd: '',
+    dialog: false,
+    failed: false,
+    fname: ''
   }),
   methods: {
     async  onSave () {
       console.log('onSave')
-      const res = await fetch('http://localhost:7001/list?user=' + this.user + '&pass= ' + this.pass)
+      const res = await fetch('http://localhost:7001/list?user=' +
+      this.user + '&pass= ' + this.pass)
       const data = await res.json()
       console.log('data = ', data)
+      console.log('data = ', data.data)
+      console.log('status = ', data.status)
+      this.fname = data.data.firstname
+      if (data.status === 1) {
+        console.log('Login ok')
+        this.dialog = true
+        setInterval(() => {
+          this.dialog = false
+        }, 3000)
+        this.$router.push('/home')
+      } else {
+        console.log('Error Login')
+        this.failed = true
+        setInterval(() => {
+          this.failed = false
+        }, 3000)
+        this.$router.push('/index.vue')
+      }
     }
 
   }
